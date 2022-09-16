@@ -120,6 +120,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dao\BdSqlServerDao.cs" />
+    <Compile Include="Dao\ClienteDao.cs" />
     <Compile Include="Dto\Chamados.cs" />
     <Compile Include="Dto\Clientes.cs" />
     <Compile Include="Dto\Servicos.cs" />
@@ -136,9 +138,7 @@
       <Version>4.8.3</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dao\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
