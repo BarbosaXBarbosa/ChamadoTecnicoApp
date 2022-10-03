@@ -43,12 +43,15 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+<<<<<<< HEAD
           "dependencies": {
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
             }
           },
+=======
+>>>>>>> eca7be5ef21f6bbfbbce8ae8a3e8c1a90c8f90aa
           "imports": [
             "net461",
             "net462",
