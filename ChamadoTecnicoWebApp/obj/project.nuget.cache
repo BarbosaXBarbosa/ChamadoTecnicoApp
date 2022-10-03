@@ -1,6 +1,5 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "WrQuwM/cSHodlAsJNxXFTQgDYjCtbFQ8S0xCtTnKC3UDYKNrqcUZQC3fGsi/nwT96Hd1eHJ89NsArvSML/IX9w==",
   "success": true,
   "projectFilePath": "C:\\Users\\asobr\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoWebApp\\ChamadoTecnicoWebApp.csproj",
@@ -114,11 +113,5 @@
     "C:\\Users\\asobr\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\asobr\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-=======
-  "dgSpecHash": "BQh2084u1MeiMI2gV1KddDMNH0ttfKYQQPmfz5VyQRlqIp/dxmnVhC5cVo5xCSzb3RaOtovdjS9E/hPvc5eeQA==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\asobr\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoWebApp\\ChamadoTecnicoWebApp.csproj",
-  "expectedPackageFiles": [],
->>>>>>> eca7be5ef21f6bbfbbce8ae8a3e8c1a90c8f90aa
   "logs": []
 }
