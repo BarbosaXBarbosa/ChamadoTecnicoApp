@@ -2,11 +2,7 @@
 <resources targetOsVersion="10.0.0" majorVersion="1">
   <index root="\" startIndexAt="obj\Debug\filtered.layout.resfiles">
     <default>
-<<<<<<< HEAD:ChamadoTecnicoData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Language" value="pt-BR" />
-=======
-      <qualifier name="Language" value="en-US" />
->>>>>>> b3b52e564a2faab2a8c5edca60039ae81810e3cf:ChamadosTecData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Contrast" value="standard" />
       <qualifier name="Scale" value="200" />
       <qualifier name="HomeRegion" value="001" />
@@ -21,11 +17,7 @@
   </index>
   <index root="\" startIndexAt="obj\Debug\resources.resfiles">
     <default>
-<<<<<<< HEAD:ChamadoTecnicoData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Language" value="pt-BR" />
-=======
-      <qualifier name="Language" value="en-US" />
->>>>>>> b3b52e564a2faab2a8c5edca60039ae81810e3cf:ChamadosTecData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Contrast" value="standard" />
       <qualifier name="Scale" value="200" />
       <qualifier name="HomeRegion" value="001" />
@@ -36,22 +28,13 @@
       <qualifier name="AlternateForm" value="" />
       <qualifier name="Platform" value="UAP" />
     </default>
-<<<<<<< HEAD:ChamadoTecnicoData/obj/Debug/priconfig.xml.intermediate
     <indexer-config type="RESW" convertDotsToSlashes="true" initialPath="ChamadoTecnicoData" />
     <indexer-config type="RESJSON" initialPath="ChamadoTecnicoData" />
-=======
-    <indexer-config type="RESW" convertDotsToSlashes="true" initialPath="ChamadosTecData" />
-    <indexer-config type="RESJSON" initialPath="ChamadosTecData" />
->>>>>>> b3b52e564a2faab2a8c5edca60039ae81810e3cf:ChamadosTecData/obj/Debug/priconfig.xml.intermediate
     <indexer-config type="RESFILES" qualifierDelimiter="." />
   </index>
   <index root="\" startIndexAt="obj\Debug\pri.resfiles">
     <default>
-<<<<<<< HEAD:ChamadoTecnicoData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Language" value="pt-BR" />
-=======
-      <qualifier name="Language" value="en-US" />
->>>>>>> b3b52e564a2faab2a8c5edca60039ae81810e3cf:ChamadosTecData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Contrast" value="standard" />
       <qualifier name="Scale" value="200" />
       <qualifier name="HomeRegion" value="001" />
@@ -67,11 +50,7 @@
   </index>
   <index root="obj\Debug\embed" startIndexAt="embed.resfiles">
     <default>
-<<<<<<< HEAD:ChamadoTecnicoData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Language" value="pt-BR" />
-=======
-      <qualifier name="Language" value="en-US" />
->>>>>>> b3b52e564a2faab2a8c5edca60039ae81810e3cf:ChamadosTecData/obj/Debug/priconfig.xml.intermediate
       <qualifier name="Contrast" value="standard" />
       <qualifier name="Scale" value="200" />
       <qualifier name="HomeRegion" value="001" />
