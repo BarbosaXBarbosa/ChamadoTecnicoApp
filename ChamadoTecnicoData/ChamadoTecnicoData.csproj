@@ -122,15 +122,26 @@
   <ItemGroup>
     <Compile Include="Dao\BdSqlServerDao.cs" />
     <Compile Include="Dao\ClienteDao.cs" />
+<<<<<<< HEAD:ChamadoTecnicoData/ChamadoTecnicoData.csproj
     <Compile Include="Dto\Chamado.cs" />
     <Compile Include="Dto\Cliente.cs" />
     <Compile Include="Dto\Tecnico.cs" />
+=======
+    <Compile Include="Dto\Chamados.cs" />
+    <Compile Include="Dto\Clientes.cs" />
+    <Compile Include="Dto\Servicos.cs" />
+    <Compile Include="Dto\ChamadosServicos.cs" />
+    <Compile Include="Dto\Tecnicos.cs" />
+>>>>>>> b3b52e564a2faab2a8c5edca60039ae81810e3cf:ChamadosTecData/ChamadosTecData.csproj
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\ChamadoTecnicoData.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SqlClient">
+      <Version>4.8.3</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SqlClient">
       <Version>4.8.3</Version>
