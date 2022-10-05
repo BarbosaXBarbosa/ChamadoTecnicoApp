@@ -26,7 +26,7 @@ namespace ChamadoTecnicoWebApp.Models
 
         public UsuarioViewModel()
         {
-            CodigoUsuario = 0;
+            CodigoUsuario = 0; // Atribuímos o zero para novos clientes/usuarios
         }
     }
 }

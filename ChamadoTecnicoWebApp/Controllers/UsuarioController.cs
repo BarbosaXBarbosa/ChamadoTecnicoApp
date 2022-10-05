@@ -26,7 +26,17 @@ namespace ChamadoTecnicoWebApp.Controllers
             return View(usuarioVm);
         }
 
+        [HttpPost]
+        public IActionResult Cadastro(UsuarioViewModel usuarioVM)
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult Login(LoginViewModel loginVM)
+        {
+            return View();
+        }
 
     }
 }
