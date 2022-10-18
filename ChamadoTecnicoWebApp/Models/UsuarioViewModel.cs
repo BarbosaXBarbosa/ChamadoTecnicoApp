@@ -29,4 +29,11 @@ namespace ChamadoTecnicoWebApp.Models
             CodigoUsuario = 0; // Atribuímos o zero para novos clientes/usuarios
         }
     }
+    public enum Perfis
+    {
+        Cliente = 0,
+        Tecnico,
+        Administrador
+    }
+
 }

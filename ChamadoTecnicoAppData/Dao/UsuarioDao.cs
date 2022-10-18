@@ -190,6 +190,111 @@ namespace ChamadoTecnicoAppData.Dao
             }
         }
 
+        public Usuario ObtemUsuario(string email)
+        {
+            //Instanciar a conexão
+            SqlConnection conexao = new SqlConnection();
+            //Configurar a conexão
+            conexao.ConnectionString = conexaoSqlServer;
+
+            //Instanciar o camando
+            SqlCommand comando = new SqlCommand();
+            //Criar a instrução sql
+            string sql = "Select * From Usuarios Where Email=@Email;";
+            //Setar a instrução sql no comando
+            comando.CommandText = sql;
+            //Setar o tipo de comando
+            comando.CommandType = System.Data.CommandType.Text;
+            //Preencher o os parametros do B.D com as informações do usuario
+            comando.Parameters.AddWithValue("@Email", email);
+
+            //Setar a execucação do comando na conexao com o B.D
+            comando.Connection = conexao;
+            //Tratamento de erro para execução do comando
+            try
+            {
+                //Conectar no B.D
+                conexao.Open();
+                //Ler os dados da tabela do B.D e transferir para a memoria
+                SqlDataReader drTabela = comando.ExecuteReader();
+                //Verificar se tem dados
+                if (drTabela.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.CodigoUsuario = int.Parse(drTabela["CodigoUsuario"].ToString());
+                    usuario.Email = drTabela["Email"].ToString();
+                    usuario.Senha = drTabela["Senha"].ToString();
+                    usuario.Perfil = drTabela["Perfil"].ToString();
+
+                    return usuario;
+                }
+
+                return null;
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            finally
+            {
+                //Desconectar do B.D
+                conexao.Close();
+            }
+        }
+
+        public Usuario ObtemUsuario(string email, string senha)
+        {
+            //Instanciar a conexão
+            SqlConnection conexao = new SqlConnection();
+            //Configurar a conexão
+            conexao.ConnectionString = conexaoSqlServer;
+
+            //Instanciar o camando
+            SqlCommand comando = new SqlCommand();
+            //Criar a instrução sql
+            string sql = "Select * From Usuarios Where Email=@Email and Senha=@Senha;";
+            //Setar a instrução sql no comando
+            comando.CommandText = sql;
+            //Setar o tipo de comando
+            comando.CommandType = System.Data.CommandType.Text;
+            //Preencher o os parametros do B.D com as informações do usuario
+            comando.Parameters.AddWithValue("@Email", email);
+            comando.Parameters.AddWithValue("@Senha", senha);
+
+            //Setar a execucação do comando na conexao com o B.D
+            comando.Connection = conexao;
+            //Tratamento de erro para execução do comando
+            try
+            {
+                //Conectar no B.D
+                conexao.Open();
+                //Ler os dados da tabela do B.D e transferir para a memoria
+                SqlDataReader drTabela = comando.ExecuteReader();
+                //Verificar se tem dados
+                if (drTabela.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.CodigoUsuario = int.Parse(drTabela["CodigoUsuario"].ToString());
+                    usuario.Email = drTabela["Email"].ToString();
+                    usuario.Senha = drTabela["Senha"].ToString();
+                    usuario.Perfil = drTabela["Perfil"].ToString();
+
+                    return usuario;
+                }
+
+                return null;
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            finally
+            {
+                //Desconectar do B.D
+                conexao.Close();
+            }
+        }
+
         public DataSet BuscaUsuario(string pesquisa)
         {
             //Instanciar a conexão

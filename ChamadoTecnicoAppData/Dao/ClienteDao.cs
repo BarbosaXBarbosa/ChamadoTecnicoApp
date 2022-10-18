@@ -235,6 +235,5 @@ namespace ChamadoTecnicoAppData.Dao
             }
         }
 
-
     }
 }
