@@ -9,7 +9,7 @@ namespace ChamadoTecnicoAppData.Dao
     public class BdSqlServerDao
     {
         //Configuração do banco de dados
-        public readonly string conexaoSqlServer = "Data Source=localhost;" +
+        public readonly string conexaoSqlServer = @"Data Source=localhost\SQLEXPRESS;" +
             " Database=ChamadosTecnicosBd;" +
             " Integrated Security=True";
     }

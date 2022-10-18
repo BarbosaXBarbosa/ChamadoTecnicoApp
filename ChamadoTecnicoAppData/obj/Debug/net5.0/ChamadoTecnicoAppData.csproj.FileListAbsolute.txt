@@ -10,3 +10,15 @@ C:\VS\Fabio\TecInfo48\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\C
 C:\VS\Fabio\TecInfo48\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.dll
 C:\VS\Fabio\TecInfo48\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ref\ChamadoTecnicoAppData.dll
 C:\VS\Fabio\TecInfo48\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.pdb
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\bin\Debug\net5.0\ChamadoTecnicoAppData.deps.json
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\bin\Debug\net5.0\ChamadoTecnicoAppData.dll
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\bin\Debug\net5.0\ChamadoTecnicoAppData.pdb
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.csproj.AssemblyReference.cache
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.AssemblyInfoInputs.cache
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.AssemblyInfo.cs
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.csproj.CoreCompileInputs.cache
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.dll
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\refint\ChamadoTecnicoAppData.dll
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ChamadoTecnicoAppData.pdb
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoAppData\obj\Debug\net5.0\ref\ChamadoTecnicoAppData.dll

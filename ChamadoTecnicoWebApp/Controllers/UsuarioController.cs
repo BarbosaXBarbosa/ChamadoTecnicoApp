@@ -82,6 +82,7 @@ namespace ChamadoTecnicoWebApp.Controllers
                 }
 
                 //2 - Faz o preenchimento os dados do usuario DTO
+                usuarioDto = new Usuario();
                 usuarioDto.CodigoUsuario = usuarioVM.CodigoUsuario;
                 usuarioDto.Email = usuarioVM.Email;
                 usuarioDto.Senha = usuarioVM.Senha;
