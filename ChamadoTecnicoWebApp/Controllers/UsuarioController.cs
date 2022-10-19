@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using ChamadoTecnicoWebApp.Models;
 using ChamadoTecnicoAppData.Dto;
 using ChamadoTecnicoAppData.Dao;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 
 namespace ChamadoTecnicoWebApp.Controllers
@@ -46,11 +49,44 @@ namespace ChamadoTecnicoWebApp.Controllers
                     ModelState.AddModelError("Senha", "Senha inválida");
                     return View();
                 }
+
+                //Autenticação do Usuário no servidor
+                //Credencial
+                List<Claim> claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, usuarioDto.CodigoUsuario.ToString()),
+                    new Claim(ClaimTypes.Email, usuarioDto.Email),
+                    new Claim(ClaimTypes.Role, usuarioDto.Perfil)
+                };
+
+                //Identidade da credencial
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                    claims,
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+
+                //Autentica a identidade do usuario
+                AuthenticationProperties authProperties = new AuthenticationProperties
+                {
+                    AllowRefresh = true, //sempre que fazer o login gera um cookie novo
+                    ExpiresUtc = DateTime.UtcNow.AddMinutes(30), //tempo de vida do cookie
+                    IssuedUtc = DateTime.UtcNow, //Horario de criação de cookie
+                    RedirectUri = @"~/home" //após desabilitar vai para essa rota
+                };
+                ClaimsPrincipal contaPrincipal = new ClaimsPrincipal(claimsIdentity);
+                //Realiza o acesso do usuário autencicando pelo cookie
+                HttpContext.SignInAsync(contaPrincipal, authProperties);
+
                 //Redireciona o usuario para a página inicial
                 return RedirectToAction("Index", "Home");
             }
             //Envia o model para a view(tela)
             return View(loginVM);
+        }
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

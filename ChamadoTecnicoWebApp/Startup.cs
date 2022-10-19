@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,19 @@ namespace ChamadoTecnicoWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //Configuração do serviço de autenticação por cookies
+            services.AddAuthentication(options => 
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+                .AddCookie(options =>
+                {
+                    options.LoginPath = @"/usuario/login";
+                    options.AccessDeniedPath = @"/usuario/logout";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +50,10 @@ namespace ChamadoTecnicoWebApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            //Habilita o serviço de autenticação
+            app.UseAuthentication();
+
             app.UseStaticFiles();
 
             app.UseRouting();
