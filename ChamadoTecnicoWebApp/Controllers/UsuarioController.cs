@@ -77,7 +77,7 @@ namespace ChamadoTecnicoWebApp.Controllers
                 HttpContext.SignInAsync(contaPrincipal, authProperties);
 
                 //Redireciona o usuario para a página inicial
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { area = "App"});
             }
             //Envia o model para a view(tela)
             return View(loginVM);

@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\bkpBancodDados",
+    "\\ChamadoTecnicoApp"
   ],
   "SelectedNode": "\\ChamadoTecnicoApp.sln",
   "PreviewInSolutionExplorer": false
