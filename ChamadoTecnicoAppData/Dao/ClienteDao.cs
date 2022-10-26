@@ -22,8 +22,9 @@ namespace ChamadoTecnicoAppData.Dao
             SqlCommand comando = new SqlCommand();
             //Criar a instrução sql
             string sql = "Insert Into " +
-                "Clientes(Nome, Profissao, Setor) " +
-                "Values(@Nome, @Profissao, @Setor);";
+                "Clientes(Nome, Profissao, Setor, CodigoUsuario) " +
+                "Values(@Nome, @Profissao, @Setor, @CodigoUsuario) " +
+                "Select SCOPE_IDENTITY();";
             //Setar a instrução sql no comando
             comando.CommandText = sql;
             //Setar o tipo de comando
@@ -32,6 +33,7 @@ namespace ChamadoTecnicoAppData.Dao
             comando.Parameters.AddWithValue("@Nome", cliente.Nome);
             comando.Parameters.AddWithValue("@Profissao", cliente.Profissao);
             comando.Parameters.AddWithValue("@Setor", cliente.Setor);
+            comando.Parameters.AddWithValue("@CodigoUsuario", cliente.CodigoUsuario);
             //Setar a execucação do comando na conexao com o B.D
             comando.Connection = conexao;
             //Tratamento de erro para execução do comando

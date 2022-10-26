@@ -103,8 +103,6 @@ namespace ChamadoTecnicoWebApp.Controllers
             //Validação dos dados informados
             if (ModelState.IsValid)
             {
-                //Instancia DTO
-                usuarioDto = new Usuario();
                 //Instancia DAO
                 usuarioDao = new UsuarioDao();
 
@@ -125,9 +123,25 @@ namespace ChamadoTecnicoWebApp.Controllers
                 usuarioDto.Perfil = Perfis.Cliente.ToString();
 
                 //3 - Realiza o cadastro do usuario cliente no banco de dados
-                usuarioDao.IncluiUsuario(usuarioDto);
+                var codigoUsuario = usuarioDao.IncluiUsuario(usuarioDto);
 
-                //4 - Envia o usuario cadastrado para fazer o Login
+                //4 - Realiza o cadastro do cliente
+                if(codigoUsuario > 0) //Usuário foi cadastro
+                {
+                    //Cria o cliente
+                    Cliente clienteDto = new Cliente();
+                    clienteDto.CodigoUsuario = codigoUsuario;
+                    clienteDto.Nome = usuarioVM.Nome;
+                    clienteDto.Profissao = "";
+                    clienteDto.Setor = "";
+
+                    //Realoza a inclusão do cliente no banco de dados
+                    ClienteDao clienteDao = new ClienteDao();   
+                    clienteDao.IncluiCliente(clienteDto);
+                    
+                }
+
+                //5 - Envia o usuario cadastrado para fazer o Login
                 return RedirectToAction("Login");
             }
             //Caso tenha algum erro retorna para tela de cadastro preenchendo com os dados

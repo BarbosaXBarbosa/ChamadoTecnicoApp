@@ -1,15 +1,15 @@
 ﻿@model ChamadoTecnicoWebApp.Models.LoginViewModel
 
-@{
-    ViewData["Title"] = "Index";
-}
 
 <h1>Index</h1>
-<img src="https://faculdadesenacpe.edu.br/v19/wp-content/uploads/2021/03/ico-logo.png" class="img-thumbnail" />
-<h4>LoginViewModel</h4>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="offset-4 col-md-4 offset-4">
+        <h4>
+            <i class="fas fa-lock fa-2x"></i>
+            Entre com sua conta
+        </h4>
+        <hr />
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -23,14 +23,18 @@
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <input type="submit" value="Entrar" class="btn btn-primary" />
+                <a asp-action="Index" asp-controller="Home" class="btn btn-secundary">Voltar</a>
+            </div>
+            <div class="form-group text-center">
+                <a asp-action="Cadastro" asp-controller="Usuario" class="btn-link">Não tem conta? Cadastre-se</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    
 </div>
 
 @section Scripts {

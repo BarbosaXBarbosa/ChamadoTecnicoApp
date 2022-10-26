@@ -11,7 +11,7 @@ namespace ChamadoTecnicoAppData.Dao
 {
     public class UsuarioDao : BdSqlServerDao
     {
-        public void IncluiUsuario(Usuario usuario)
+        public int IncluiUsuario(Usuario usuario)
         {
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
@@ -23,7 +23,8 @@ namespace ChamadoTecnicoAppData.Dao
             //Criar a instrução sql
             string sql = "Insert Into " +
                 "Usuarios(Email, Senha, Perfil) " +
-                "Values(@Email, @Senha, @Perfil);";
+                "Values(@Email, @Senha, @Perfil) " +
+                "Select SCOPE_IDENTITY();";
             //Setar a instrução sql no comando
             comando.CommandText = sql;
             //Setar o tipo de comando
@@ -40,7 +41,8 @@ namespace ChamadoTecnicoAppData.Dao
                 //Conectar no B.D
                 conexao.Open();
                 //Executar o comando no B.D
-                comando.ExecuteNonQuery();
+                int codigo = Convert.ToInt32(comando.ExecuteScalar());
+                return codigo;
             }
             catch (Exception erro)
             {

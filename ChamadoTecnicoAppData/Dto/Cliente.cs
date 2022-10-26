@@ -22,6 +22,7 @@ namespace ChamadoTecnicoAppData.Dto
 
         //Propriedade = Encapsulamento
         public int CodigoCliente { get; set; }
+        public int CodigoUsuario { get; set; }
         public string Nome { get; set; }
         public string Profissao { get; set; }
         public string Setor { get; set; }

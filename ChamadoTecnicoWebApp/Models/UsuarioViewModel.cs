@@ -11,6 +11,10 @@ namespace ChamadoTecnicoWebApp.Models
         [Display(Name = "Código")]
         public int CodigoUsuario { get; set; }
 
+        [Display(Name ="Nome")]
+        [Required(ErrorMessage ="Preenchimento Obrigatório")]
+        public string Nome { get; set; }
+
         [Display(Name = "E-mail")] //Exibição do campo
         [Required(ErrorMessage = "Peenchimento obrigatório!")] //Preenchimento do campo obrigatória
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail inválido!")] //Define o tipo de campo com o formato de dado específico
@@ -20,9 +24,6 @@ namespace ChamadoTecnicoWebApp.Models
         [DataType(DataType.Password, ErrorMessage = "Senha inválida!")] //Define o tipo de campo com o formato de dado específico
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Informe uma senha com no mínimo 8 digitos")] //Define o tamanho do campo
         public string Senha { get; set; }
-
-        [Required(ErrorMessage = "Peenchimento obrigatório!")] //Preenchimento do campo obrigatória
-        public string Perfil { get; set; }
 
         public UsuarioViewModel()
         {
