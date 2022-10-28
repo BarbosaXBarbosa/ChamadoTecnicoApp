@@ -341,5 +341,58 @@ namespace ChamadoTecnicoAppData.Dao
                 conexao.Close();
             }
         }
+        public IEnumerable<Usuario> ListaUsuario()
+        {
+            //Instanciar a conexão
+            SqlConnection conexao = new SqlConnection();
+            //Configurar a conexão
+            conexao.ConnectionString = conexaoSqlServer;
+
+            //Instanciar o comando
+            SqlCommand comando = new SqlCommand();
+            //Criar a instrução sql
+            string sql = "Select * From Usuarios;";
+            //Setar a instrução sql no comando
+            comando.CommandText = sql;
+            //Setar o tipo de comando
+            comando.CommandType = System.Data.CommandType.Text;
+            //Setar a execucação do comando na conexao com o B.D
+            comando.Connection = conexao;
+            //Tratamento de erro para execução do comando
+            try
+            {
+                //Abrir a conexão com B.D
+                conexao.Open();
+                //Fazer leitura dos dados
+                SqlDataReader leitor = comando.ExecuteReader();
+                //Criar a lista que vai guardar os dados
+                List<Usuario> lista = new List<Usuario>();
+                //Preencher a lista de dados
+                while (leitor.Read())
+                {
+                    //Criar o objeto usuario e preencher com os dados lidos
+                    Usuario usuario = new Usuario();
+                    usuario.CodigoUsuario = int.Parse(leitor["CodigoUsuario"].ToString()); //Tem que ser igual o do banco
+                    usuario.Email = leitor["Email"].ToString();
+                    usuario.Senha = leitor["Senha"].ToString();
+                    usuario.Perfil = leitor["Perfil"].ToString();
+                    //Adicionar o objeto na lista
+                    lista.Add(usuario);
+                }
+                //Retornar a lista de dados preenchida
+                return lista;
+                
+
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            finally
+            {
+                //Desconectar do B.D
+                conexao.Close();
+            }
+        }
     }
 }

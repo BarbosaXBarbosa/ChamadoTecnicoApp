@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ChamadoTecnicoWebApp</title>
+    <title>ChamadoTecnicoWebApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
 </head>
@@ -53,9 +53,21 @@
                         </h6>
                         <ul class="nav flex-column mb-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" asp-area="App" asp-controller="Usuarios" asp-action="Index">
                                     <span data-feather="file-text"></span>
-                                    Neste mês
+                                    Usuários
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="App" asp-controller="Clientes" asp-action="Index">
+                                    <span data-feather="file-text"></span>
+                                    Clientes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="App" asp-controller="Técnicos" asp-action="Index">
+                                    <span data-feather="file-text"></span>
+                                    Técnicos
                                 </a>
                             </li>
                         </ul>

@@ -368,3 +368,5 @@ C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTe
 C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoWebApp\obj\Debug\net5.0\Razor\Areas\App\Views\_ViewImports.cshtml.g.cs
 C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoWebApp\obj\Debug\net5.0\Razor\Areas\App\Views\_ViewStart.cshtml.g.cs
 C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoWebApp\bin\Debug\net5.0\libman.json
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoWebApp\obj\Debug\net5.0\Razor\Areas\App\Views\Usuarios\Index.cshtml.g.cs
+C:\Users\joao.vbarbosa6\Source\Repos\BarbosaXBarbosa\ChamadoTecnicoApp\ChamadoTecnicoWebApp\obj\Debug\net5.0\Razor\Areas\App\Views\Usuarios\Inclui.cshtml.g.cs
