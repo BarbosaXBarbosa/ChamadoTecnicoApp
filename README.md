@@ -36,7 +36,7 @@ O chamado técnico foi criado para:
 
 ## Orientador do Projeto
 
-[<br><sub>Fabio T. Onishi</sub>] (https://www.linkedin.com/in/fabiaotonishi/)
+[<br><sub>Fabio T. Onishi</sub> ](https://www.linkedin.com/in/fabiaotonishi)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
