@@ -25,6 +25,8 @@ namespace ChamadoTecnicoWebApp.Models
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Informe uma senha com no mínimo 8 digitos")] //Define o tamanho do campo
         public string Senha { get; set; }
 
+        public Perfis Perfil { get; set; }
+
         public UsuarioViewModel()
         {
             CodigoUsuario = 0; // Atribuímos o zero para novos clientes/usuarios

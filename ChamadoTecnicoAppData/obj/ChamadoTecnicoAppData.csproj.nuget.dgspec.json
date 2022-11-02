@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joao.vbarbosa6\\Source\\Repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj": {}
+    "C:\\Users\\joao.vbarbosa6\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joao.vbarbosa6\\Source\\Repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj": {
+    "C:\\Users\\joao.vbarbosa6\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joao.vbarbosa6\\Source\\Repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj",
+        "projectUniqueName": "C:\\Users\\joao.vbarbosa6\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj",
         "projectName": "ChamadoTecnicoAppData",
-        "projectPath": "C:\\Users\\joao.vbarbosa6\\Source\\Repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj",
+        "projectPath": "C:\\Users\\joao.vbarbosa6\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\ChamadoTecnicoAppData.csproj",
         "packagesPath": "C:\\Users\\joao.vbarbosa6\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joao.vbarbosa6\\Source\\Repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\obj\\",
+        "outputPath": "C:\\Users\\joao.vbarbosa6\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoAppData\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

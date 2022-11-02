@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uFuDH70cpJsDnAsv+ZLnU49Djekig51aIwU5qPfYvdTJlndMM7XeWpZMrQ8oNmiru845NBMuxXYO72zxibfP8g==",
+  "dgSpecHash": "WLK+lT9S3kikc805dr+hv8pcFtmXHRX9tZKhMS49W7PAVwFnls48v8HgvIxiRVKvdcdUfqfvqYkOLxg76m2v6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\joao.vbarbosa6\\Source\\Repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoApp\\ChamadoTecnicoApp.csproj",
+  "projectFilePath": "C:\\Users\\joao.vbarbosa6\\source\\repos\\BarbosaXBarbosa\\ChamadoTecnicoApp\\ChamadoTecnicoApp\\ChamadoTecnicoApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joao.vbarbosa6\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\joao.vbarbosa6\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
