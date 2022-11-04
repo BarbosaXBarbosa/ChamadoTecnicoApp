@@ -2,13 +2,14 @@
 
 <div class="row">
     <div class="offset-4 col-md-4 offset-4">
-        <h4>Criação de Usuário</h4>
+        <h4>Altera</h4>
         <hr />
-        <form asp-action="Inclui">
+        <form asp-action="Altera">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="hidden">
                 <input asp-for="CodigoUsuario" class="hidden" type="hidden" />
-            @*</div>
+            </div>
+            @*
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />

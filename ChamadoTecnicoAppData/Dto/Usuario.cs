@@ -12,10 +12,6 @@ namespace ChamadoTecnicoAppData.Dto
         [Display(Name = "Código")]
         public int CodigoUsuario { get; set; }
 
-        [Display(Name = "Nome")]
-        [Required(ErrorMessage = "Preenchimento Obrigatório")]
-        public string Nome { get; set; }
-
         [Display(Name = "E-mail")] //Exibição do campo
         [Required(ErrorMessage = "Peenchimento obrigatório!")] //Preenchimento do campo obrigatória
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail inválido!")] //Define o tipo de campo com o formato de dado específico

@@ -11,7 +11,7 @@ namespace ChamadoTecnicoAppData.Dao
 {
     public class ClienteDao : BdSqlServerDao
     {
-        public void IncluiCliente(Cliente cliente)
+        public int IncluiCliente(Cliente cliente)
         {
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
@@ -42,7 +42,8 @@ namespace ChamadoTecnicoAppData.Dao
                 //Conectar no B.D
                 conexao.Open();
                 //Executar o comando no B.D
-                comando.ExecuteNonQuery();
+                int codigo = Convert.ToInt32(comando.ExecuteScalar());
+                return codigo;
             }
             catch (Exception erro)
             {
@@ -191,6 +192,59 @@ namespace ChamadoTecnicoAppData.Dao
                 conexao.Close();
             }
         }
+
+        public Cliente ObtemClientePor(int codigoUsuario)
+        {
+            //Instanciar a conexão
+            SqlConnection conexao = new SqlConnection();
+            //Configurar a conexão
+            conexao.ConnectionString = conexaoSqlServer;
+
+            //Instanciar o camando
+            SqlCommand comando = new SqlCommand();
+            //Criar a instrução sql
+            string sql = "Select * From Clientes Where CodigoUsuario=@CodigoUsuario;";
+            //Setar a instrução sql no comando
+            comando.CommandText = sql;
+            //Setar o tipo de comando
+            comando.CommandType = System.Data.CommandType.Text;
+            //Preencher o os parametros do B.D com as informações do cliente
+            comando.Parameters.AddWithValue("@CodigoUsuario", codigoUsuario);
+
+            //Setar a execucação do comando na conexao com o B.D
+            comando.Connection = conexao;
+            //Tratamento de erro para execução do comando
+            try
+            {
+                //Conectar no B.D
+                conexao.Open();
+                //Ler os dados da tabela do B.D e transferir para a memoria
+                SqlDataReader drTabela = comando.ExecuteReader();
+                //Verificar se tem dados
+                if (drTabela.Read())
+                {
+                    Cliente cliente = new Cliente();
+                    cliente.CodigoCliente = int.Parse(drTabela["CodigoCliente"].ToString());
+                    cliente.CodigoUsuario = int.Parse(drTabela["CodigoUsuario"].ToString());
+                    cliente.Nome = drTabela["Nome"].ToString();
+                    cliente.Profissao = drTabela["Profissao"].ToString();
+                    cliente.Setor = drTabela["Setor"].ToString();
+
+                    return cliente;
+                }
+
+                return null;
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            finally
+            {
+                //Desconectar do B.D
+                conexao.Close();
+            }
+        } //Obtém o cliente usando o código de usuário
 
         public DataSet BuscaCliente(string pesquisa)
         {

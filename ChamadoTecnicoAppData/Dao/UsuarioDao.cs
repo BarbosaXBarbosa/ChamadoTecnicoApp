@@ -56,7 +56,7 @@ namespace ChamadoTecnicoAppData.Dao
 
         }
 
-        public void AlteraUsuario(Usuario usuario)
+        public int AlteraUsuario(Usuario usuario)
         {
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
@@ -86,7 +86,7 @@ namespace ChamadoTecnicoAppData.Dao
                 //Conectar no B.D
                 conexao.Open();
                 //Executar o comando no B.D
-                comando.ExecuteNonQuery();
+                return comando.ExecuteNonQuery();
             }
             catch (Exception erro)
             {
