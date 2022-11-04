@@ -62,8 +62,15 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
                         {
                             //cria o cadastro do cliente
                             Cliente clienteDto = new Cliente();
+                            //obtem o cliente do usuario
+                            clienteDto = _clienteDao.ObtemClientePor(usuarioDto.CodigoUsuario);
+
+                            //Altera somente com o novo nome do cliente 
                             clienteDto.Nome = usuarioVm.Nome ;
-                            clienteDto.CodigoUsuario = codigoUsuario;
+
+                            //Preenche com valor nulo string vazia
+                            clienteDto.Profissao = ""; 
+                            clienteDto.Setor = "";
                             //instancia ao acesso ao banco de dados
                             _clienteDao = new ClienteDao();
                             //inclui o cliente no banco de daods
