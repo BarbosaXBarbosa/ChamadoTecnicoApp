@@ -56,7 +56,7 @@ namespace ChamadoTecnicoAppData.Dao
 
         }
 
-        public bool AlteraTecico(Tecnico tecnico)
+        public bool AlteraTecnico(Tecnico tecnico)
         {
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
