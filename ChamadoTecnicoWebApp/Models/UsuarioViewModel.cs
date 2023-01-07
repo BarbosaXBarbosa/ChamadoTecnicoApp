@@ -8,11 +8,14 @@ namespace ChamadoTecnicoWebApp.Models
 {
     public class UsuarioViewModel
     {
+        /* 
+        * Usuario
+        */
         [Display(Name = "Código")]
         public int CodigoUsuario { get; set; }
 
-        [Display(Name ="Nome")]
-        [Required(ErrorMessage ="Preenchimento Obrigatório")]
+        [Display(Name = "Nome")] //Exibição do campo
+        [Required(ErrorMessage = "Peenchimento obrigatório!")] //Preenchimento do campo obrigatória
         public string Nome { get; set; }
 
         [Display(Name = "E-mail")] //Exibição do campo
@@ -25,18 +28,29 @@ namespace ChamadoTecnicoWebApp.Models
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Informe uma senha com no mínimo 8 digitos")] //Define o tamanho do campo
         public string Senha { get; set; }
 
+        //[Required(ErrorMessage = "Peenchimento obrigatório!")] //Preenchimento do campo obrigatória
         public Perfis Perfil { get; set; }
+
+        /* 
+         * Cliente
+         */
+
+        [Display(Name = "Profissão")] //Exibição do campo
+        public string Profissao { get; set; }
+
+        public string Setor { get; set; }
 
         public UsuarioViewModel()
         {
-            CodigoUsuario = 0; // Atribuímos o zero para novos clientes/usuarios
+            CodigoUsuario = 0;
         }
     }
+
     public enum Perfis
     {
-        Cliente = 0,
+        Cliente=0,
+        [Display(Name = "Técnico")]
         Tecnico,
         Administrador
     }
-
 }

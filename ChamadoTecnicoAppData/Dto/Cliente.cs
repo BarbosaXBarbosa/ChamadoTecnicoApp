@@ -23,18 +23,17 @@ namespace ChamadoTecnicoAppData.Dto
 
         //Propriedade = Encapsulamento
 
-        [Display(Name = "Código do Cliente")]
-
+        [Display(Name = "Código do cliente")] //Exibição do campo
         public int CodigoCliente { get; set; }
 
-        [Display(Name = "Código do Usuário")]
-        [Required(ErrorMessage = "Peenchimento obrigatório!")] //Preenchimento do campo obrigatória
+        [Display(Name = "Código do usuário")] //Exibição do campo
+        [Required(ErrorMessage = "Peenchimento obrigatório!")]
         public int CodigoUsuario { get; set; }
 
-        [Required(ErrorMessage = "Peenchimento obrigatório!")] //Preenchimento do campo obrigatória
+        [Required(ErrorMessage = "Peenchimento obrigatório!")]
         public string Nome { get; set; }
 
-        [Display(Name = "Profissão")]
+        [Display(Name = "Profissão")] //Exibição do campo
         public string Profissao { get; set; }
 
         public string Setor { get; set; }

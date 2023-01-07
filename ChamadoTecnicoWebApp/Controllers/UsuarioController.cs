@@ -10,13 +10,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 
-
 namespace ChamadoTecnicoWebApp.Controllers
 {
     public class UsuarioController : Controller
     {
-        // Atributos
-        // Objetos do banco de dados: Usuario
+        //Atributos
+        //Objetos do banco de dados: Usuario
         Usuario usuarioDto;
         UsuarioDao usuarioDao;
 
@@ -39,22 +38,20 @@ namespace ChamadoTecnicoWebApp.Controllers
                 usuarioDto = new Usuario();
                 //Instancia DAO
                 usuarioDao = new UsuarioDao();
-
-                //1 - Verifica se o cliente já está cadastro
+                //Obtem o usuario pelo email e senha
                 usuarioDto = usuarioDao.ObtemUsuario(loginVM.Email, loginVM.Senha);
+                //Verifica se o usuario é valido
                 if (usuarioDto == null)
                 {
-                    //Adiociona uma mensagem de erro
-                    ModelState.AddModelError("Email", "Email não encontrado");
-                    ModelState.AddModelError("Senha", "Senha inválida");
+                    ModelState.AddModelError("Email", "E-mail informado inválido!");
+                    ModelState.AddModelError("Senha", "Senha informada inválida!");
                     return View();
                 }
-
-                //Autenticação do Usuário no servidor
+                //Autenticacao do usuario no servidor
                 //Credencial
                 List<Claim> claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, usuarioDto.CodigoUsuario.ToString()),
+                    new Claim(ClaimTypes.Name, usuarioDto.CodigoUsuario.ToString()),
                     new Claim(ClaimTypes.Email, usuarioDto.Email),
                     new Claim(ClaimTypes.Role, usuarioDto.Perfil)
                 };
@@ -69,19 +66,21 @@ namespace ChamadoTecnicoWebApp.Controllers
                 {
                     AllowRefresh = true, //sempre que fazer o login gera um cookie novo
                     ExpiresUtc = DateTime.UtcNow.AddMinutes(30), //tempo de vida do cookie
-                    IssuedUtc = DateTime.UtcNow, //Horario de criação de cookie
-                    RedirectUri = @"~/home" //após desabilitar vai para essa rota
+                    IssuedUtc = DateTime.UtcNow, //horario de criacao do cookie
+                    RedirectUri = @"~/home" //apos desabilitar vai para essa rota
                 };
                 ClaimsPrincipal contaPrincipal = new ClaimsPrincipal(claimsIdentity);
-                //Realiza o acesso do usuário autencicando pelo cookie
+                //Realiza o acesso do usuario autenticando pelo cookie
                 HttpContext.SignInAsync(contaPrincipal, authProperties);
 
-                //Redireciona o usuario para a página inicial
-                return RedirectToAction("Index", "Home", new { area = "App"});
+                //Redireciona o usuario para pagina inicial
+                return RedirectToAction("Index", "Home", new { area = "App" });
             }
+
             //Envia o model para a view(tela)
             return View(loginVM);
         }
+
         [HttpGet]
         public IActionResult Logout()
         {
@@ -116,6 +115,7 @@ namespace ChamadoTecnicoWebApp.Controllers
                 }
 
                 //2 - Faz o preenchimento os dados do usuario DTO
+                //Instancia DTO
                 usuarioDto = new Usuario();
                 usuarioDto.CodigoUsuario = usuarioVM.CodigoUsuario;
                 usuarioDto.Email = usuarioVM.Email;
@@ -125,28 +125,26 @@ namespace ChamadoTecnicoWebApp.Controllers
                 //3 - Realiza o cadastro do usuario cliente no banco de dados
                 var codigoUsuario = usuarioDao.IncluiUsuario(usuarioDto);
 
-                //4 - Realiza o cadastro do cliente
-                if(codigoUsuario > 0) //Usuário foi cadastro
+                //3.1 - Realiza o cadastro do cliente
+                if (codigoUsuario > 0) //Usuario foi cadastrado
                 {
-                    //Cria o cliente
+                    //Faz o cadastro do cliente
                     Cliente clienteDto = new Cliente();
                     clienteDto.CodigoUsuario = codigoUsuario;
                     clienteDto.Nome = usuarioVM.Nome;
                     clienteDto.Profissao = "";
                     clienteDto.Setor = "";
 
-                    //Realoza a inclusão do cliente no banco de dados
-                    ClienteDao clienteDao = new ClienteDao();   
+                    //Realiza a inclusão do cliente no banco de dados
+                    ClienteDao clienteDao = new ClienteDao();
                     clienteDao.IncluiCliente(clienteDto);
-                    
                 }
 
-                //5 - Envia o usuario cadastrado para fazer o Login
+                //4 - Envia o usuario cadastrado para fazer o Login
                 return RedirectToAction("Login");
             }
             //Caso tenha algum erro retorna para tela de cadastro preenchendo com os dados
             return View(usuarioVM);
         }
-
     }
 }
