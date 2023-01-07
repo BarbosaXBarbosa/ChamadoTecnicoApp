@@ -1,0 +1,15 @@
+﻿@model ChamadoTecnicoWebApp.Models.UsuarioViewModel
+
+<div class="row">
+    <div class="offset-4 col-md-4 offset-'4">    
+        <h4>Deseja excluir o usuário?</h4>
+        <hr />    
+        <form asp-action="Exclui">
+            <input type="hidden" asp-for="CodigoUsuario"/>
+            <div class="form-group text-center">
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>

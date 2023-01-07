@@ -56,7 +56,7 @@ namespace ChamadoTecnicoAppData.Dao
 
         }
 
-        public int AlteraUsuario(Usuario usuario)
+        public bool AlteraUsuario(Usuario usuario)
         {
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
@@ -86,7 +86,8 @@ namespace ChamadoTecnicoAppData.Dao
                 //Conectar no B.D
                 conexao.Open();
                 //Executar o comando no B.D
-                return comando.ExecuteNonQuery();
+                comando.ExecuteNonQuery();
+                return true;
             }
             catch (Exception erro)
             {
@@ -341,6 +342,7 @@ namespace ChamadoTecnicoAppData.Dao
                 conexao.Close();
             }
         }
+
         public IEnumerable<Usuario> ListaUsuario()
         {
             //Instanciar a conexão
@@ -363,26 +365,24 @@ namespace ChamadoTecnicoAppData.Dao
             {
                 //Abrir a conexão com B.D
                 conexao.Open();
-                //Fazer leitura dos dados
+                //Fazer a leitura dos dados 
                 SqlDataReader leitor = comando.ExecuteReader();
                 //Criar a lista que vai guardar os dados
                 List<Usuario> lista = new List<Usuario>();
                 //Preencher a lista de dados
                 while (leitor.Read())
                 {
-                    //Criar o objeto usuario e preencher com os dados lidos
+                    //Criar o objeto usuario e preecher com os dados lidos
                     Usuario usuario = new Usuario();
-                    usuario.CodigoUsuario = int.Parse(leitor["CodigoUsuario"].ToString()); //Tem que ser igual o do banco
+                    usuario.CodigoUsuario = int.Parse(leitor["CodigoUsuario"].ToString());
                     usuario.Email = leitor["Email"].ToString();
                     usuario.Senha = leitor["Senha"].ToString();
                     usuario.Perfil = leitor["Perfil"].ToString();
-                    //Adicionar o objeto na lista
+                    //Adicionar objeto na lista de dados
                     lista.Add(usuario);
                 }
                 //Retornar a lista de dados preenchida
                 return lista;
-                
-
             }
             catch (Exception erro)
             {
@@ -394,5 +394,64 @@ namespace ChamadoTecnicoAppData.Dao
                 conexao.Close();
             }
         }
+
+        public IEnumerable<Usuario> ListaUsuario(string pesquisa="")
+        {
+            //Instanciar a conexão
+            SqlConnection conexao = new SqlConnection();
+            //Configurar a conexão
+            conexao.ConnectionString = conexaoSqlServer;
+
+            //Instanciar o comando
+            SqlCommand comando = new SqlCommand();
+            //Criar a instrução sql
+            string sql = "Select * From Usuarios;";
+            if (!string.IsNullOrWhiteSpace(pesquisa))
+            {
+                sql = "Select * From Usuarios Where Email Like +'%'+ @Pesquisa +'%' Order By CodigoUsuario;";
+                //Preencher o os parametros do B.D com as informações do cliente
+                comando.Parameters.AddWithValue("@Pesquisa", pesquisa);
+            }
+            //Setar a instrução sql no comando
+            comando.CommandText = sql;
+            //Setar o tipo de comando
+            comando.CommandType = System.Data.CommandType.Text;
+            //Setar a execucação do comando na conexao com o B.D
+            comando.Connection = conexao;
+            //Tratamento de erro para execução do comando
+            try
+            {
+                //Abrir a conexão com B.D
+                conexao.Open();
+                //Fazer a leitura dos dados 
+                SqlDataReader leitor = comando.ExecuteReader();
+                //Criar a lista que vai guardar os dados
+                List<Usuario> lista = new List<Usuario>();
+                //Preencher a lista de dados
+                while (leitor.Read())
+                {
+                    //Criar o objeto usuario e preecher com os dados lidos
+                    Usuario usuario = new Usuario();
+                    usuario.CodigoUsuario = int.Parse(leitor["CodigoUsuario"].ToString());
+                    usuario.Email = leitor["Email"].ToString();
+                    usuario.Senha = leitor["Senha"].ToString();
+                    usuario.Perfil = leitor["Perfil"].ToString();
+                    //Adicionar objeto na lista de dados
+                    lista.Add(usuario);
+                }
+                //Retornar a lista de dados preenchida
+                return lista;
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            finally
+            {
+                //Desconectar do B.D
+                conexao.Close();
+            }
+        }
+
     }
 }

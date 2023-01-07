@@ -25,18 +25,18 @@ namespace ChamadoTecnicoWebApp
         {
             services.AddControllersWithViews();
 
-            //Configuração do serviço de autenticação por cookies
+            //Configuração do serviço de autententicação por cookies
             services.AddAuthentication(options => 
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-                .AddCookie(options =>
-                {
-                    options.LoginPath = @"/usuario/login";
-                    options.AccessDeniedPath = @"/usuario/logout";
-                });
+            .AddCookie(options =>
+            {
+                options.LoginPath = @"/usuario/login";
+                options.LogoutPath = @"/usuario/logout";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +51,7 @@ namespace ChamadoTecnicoWebApp
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //Habilita o serviço de autenticação
+            //Habilita o serviço de autenticacao
             app.UseAuthentication();
 
             app.UseStaticFiles();

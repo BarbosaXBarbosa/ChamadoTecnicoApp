@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChamadoTecnicoWebApp</title>
+    <title>@ViewData["Title"] Chamado Técnicos WebApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/js/all.js" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
 </head>
 <body>
@@ -21,17 +22,21 @@
 
     <div class="container-fluid">
         <div class="row">
-
-            <!-- Menu Lateral -->
+            <!-- Area lateral -->
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
-
-                    <!-- Menu Geral -->
+                    <!-- Menu geral -->
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" asp-action="Index" asp-controller="Home" asp-area="App">
+                            <a class="nav-link active text-uppercase" asp-action="Index" asp-controller="Home" asp-area="App">
                                 <span data-feather="home"></span>
-                                Paniel de controle <span class="sr-only">(current)</span>
+                                Painel de controle <span class="sr-only">(atual)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Usuarios" asp-action="Altera" asp-route-id="@User.Identity.Name">
+                                <span data-feather="file"></span>
+                                Meu perfil
                             </a>
                         </li>
                         <li class="nav-item">
@@ -43,7 +48,7 @@
                     </ul>
 
                     <!-- Menu admin -->
-                    @if(User.Identity.IsAuthenticated && User.IsInRole(Perfis.Administrador.ToString()))
+                    @if (User.Identity.IsAuthenticated && User.IsInRole(Perfis.Administrador.ToString()))
                     {
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                             <span>Administração</span>
@@ -59,13 +64,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="App" asp-controller="Clientes" asp-action="Index">
-                                    <span data-feather="file-text"></span>
-                                    Clientes
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="App" asp-controller="Técnicos" asp-action="Index">
+                                <a class="nav-link" asp-area="App" asp-controller="Tecnicos" asp-action="Index">
                                     <span data-feather="file-text"></span>
                                     Técnicos
                                 </a>
@@ -76,12 +75,14 @@
                 </div>
             </nav>
 
-            <!-- Área de conteúdo principal -->
+            <!-- Area de conteudo principal -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 @RenderBody()
             </main>
+
         </div>
     </div>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

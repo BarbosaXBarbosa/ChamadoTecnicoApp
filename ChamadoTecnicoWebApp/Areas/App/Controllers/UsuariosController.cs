@@ -1,6 +1,7 @@
 ﻿using ChamadoTecnicoAppData.Dao;
 using ChamadoTecnicoAppData.Dto;
 using ChamadoTecnicoWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,80 +11,92 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
     public class UsuariosController : Controller
     {
         private UsuarioDao _usuarioDao;
-        private ClienteDao _clienteDao;
-
-        // GET: UsuariosController
+        private ClienteDao _clienteDao;        
+        
+        [HttpGet]
+        [Authorize(Roles = "Administrador,Tecnico")]
         public ActionResult Index()
         {
-            //Instanciar UsuarioDao
+            //Instancia o acesso ao banco de dados
             _usuarioDao = new UsuarioDao();
-            //Obter a de usuario do banco de dados
-            var listaUsuarios =_usuarioDao.ListaUsuario();
-
-            //Enviar a lista de dados para view
+            //Obtem a lista de usuarios do banco de dados
+            var listaUsuarios = _usuarioDao.ListaUsuario();
+            //Envia a lista de dados para View
+            return View(listaUsuarios);
+        }
+        
+        [HttpPost]
+        [Authorize(Roles = "Administrador, Tecnico")]
+        public ActionResult Index(string pesquisa)
+        {
+            //Instancia o acesso ao banco de dados
+            _usuarioDao = new UsuarioDao();
+            //Obtem a lista de usuarios do banco de dados
+            var listaUsuarios = _usuarioDao.ListaUsuario(pesquisa);
+            //Envia a lista de dados para View
             return View(listaUsuarios);
         }
 
-        // GET: UsuariosController/Create
+        [Authorize(Roles = "Administrador,Tecnico")]
         public ActionResult Inclui()
         {
-            UsuarioViewModel usuarioVm = new UsuarioViewModel();   
-        
+            UsuarioViewModel usuarioVm = new UsuarioViewModel();
             return View(usuarioVm);
         }
 
-        // POST: UsuariosController/Inclui
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador,Tecnico")]
         public ActionResult Inclui(UsuarioViewModel usuarioVm)
         {
+            //Tratamento de erros
             try
             {
-                //Primeiro Passo
+                //1 passo: cadastrar o usuario
+                //Validacao dos dados
                 if (ModelState.IsValid)
                 {
-                    //Preencher o Dto com ViewModel
+                    //Preenche o Dto com ViewModel
                     Usuario usuarioDto = new Usuario();
                     usuarioDto.CodigoUsuario = 0;
-                    usuarioDto.Email = usuarioVm.Email ;
-                    usuarioDto.Senha = usuarioVm.Senha ;
-                    usuarioDto.Perfil = usuarioVm.Perfil.ToString() ;
-
-                    //Fazer a inclusão no banco de dados
+                    usuarioDto.Email = usuarioVm.Email;
+                    usuarioDto.Senha = usuarioVm.Senha;
+                    usuarioDto.Perfil = usuarioVm.Perfil.ToString();
+                                        
+                    //Instancia o acesso ao banco de dados
                     _usuarioDao = new UsuarioDao();
+                    //Realiza a inclusão no banco de dados
                     var codigoUsuario = _usuarioDao.IncluiUsuario(usuarioDto);
 
-                    //Segundo Passo, Cadastrar o cliente ou técnico conforme o perfil
-
-                    //verifica se cadastrou o usuario
+                    //2 passo: Cadastrar o cliente ou tecnico conforme o perfil
+                    //Verifica se cadastrou o usuario
                     if (codigoUsuario > 0)
                     {
-                        if(usuarioVm.Perfil == Perfis.Cliente)
+                        if (usuarioVm.Perfil == Perfis.Cliente)
                         {
-                            //cria o cadastro do cliente
+                            //Cria o cadastro de cliente
                             Cliente clienteDto = new Cliente();
-                            //obtem o cliente do usuario
-                            clienteDto = _clienteDao.ObtemClientePor(usuarioDto.CodigoUsuario);
-
-                            //Altera somente com o novo nome do cliente 
-                            clienteDto.Nome = usuarioVm.Nome ;
-
+                            clienteDto.CodigoUsuario = codigoUsuario;
+                            clienteDto.Nome = usuarioVm.Nome;
                             //Preenche com valor nulo string vazia
                             clienteDto.Profissao = ""; 
                             clienteDto.Setor = "";
-                            //instancia ao acesso ao banco de dados
+                            //Instancia ao acesso ao banco de dados
                             _clienteDao = new ClienteDao();
-                            //inclui o cliente no banco de daods
+                            //Inclui o cliente no banco de dados
                             _clienteDao.IncluiCliente(clienteDto);
-                        }
+                        } 
+                        //else {} //para o administrador e tecnico
                     }
 
+                    //Retorna
                     return RedirectToAction(nameof(Index));
                 }
 
-                //casO tenha erro volta para view de inclusão
+                //Caso tenha erro volta para view de inclusão
                 return View(usuarioVm);
-
+                
             }
             catch
             {
@@ -92,11 +105,11 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
         }
 
         [HttpGet]
-        // GET: UsuariosController/Edit/
+        [Authorize(Roles = "Administrador,Tecnico,Cliente")]
         public ActionResult Altera(int id)
         {
-            //1 - Obtém o usuario
-            //inicia o acesso ao banco de dados
+            //1 passo: obtem o usuario
+            //Instancia o acesso ao banco de dados
             _usuarioDao = new UsuarioDao();
             //Obtem o usuario no banco de dados
             var usuarioDto = _usuarioDao.ObtemUsuario(id);
@@ -105,69 +118,79 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
             //Preenche ViewModel com o Dto
             usuarioVm.CodigoUsuario = usuarioDto.CodigoUsuario;
             usuarioVm.Email = usuarioDto.Email;
-            //usuarioVm.Senha = usuarioDto.Senha;//Vir com senha em branco
+            //usuarioVm.Senha = usuarioDto.Senha; //Seta senha em branco
+            //Verifica o perfil do usuario
             switch (usuarioDto.Perfil)
             {
                 case "Cliente":
                     usuarioVm.Perfil = Perfis.Cliente;
-                    //2 - Obtém Cliente pelo código do usuário
+                    //2 passo: obtem o cliente pelo codigo do usuario
+                    //Instancia ao acesso ao banco de dados
+                    _clienteDao = new ClienteDao();
                     var clienteDto = new Cliente();
-                    clienteDto = _clienteDao.ObtemCliente(usuarioDto.CodigoUsuario);
-                    //Preencher o Usuario View Model com os dados do cliente
-                    usuarioVm = new UsuarioViewModel();
-
+                    clienteDto = _clienteDao.ObtemClientePorUsuario(usuarioDto.CodigoUsuario);
+                    //Preenche o usuario ViewModel com os dados do cliente                    
+                    usuarioVm.Nome = clienteDto.Nome;
                     break;
                 case "Tecnico":
                     usuarioVm.Perfil = Perfis.Tecnico;
                     break;
                 case "Administrador":
-                    usuarioVm.Perfil= Perfis.Administrador;
+                    usuarioVm.Perfil = Perfis.Administrador;
+                    break;
+                default:
                     break;
             }
-           
+
             return View(usuarioVm);
         }
 
-        // POST: UsuariosController/Altera
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador,Tecnico,Cliente")]
         public ActionResult Altera(UsuarioViewModel usuarioVm)
         {
+            //Tratamento de erros
             try
             {
+                //Validacao dos dados
                 if (ModelState.IsValid)
                 {
-                    //Preencher o Dto com ViewModel
+                    //Preenche o Dto com ViewModel
                     Usuario usuarioDto = new Usuario();
-                    usuarioDto.CodigoUsuario = 0;
+                    usuarioDto.CodigoUsuario = usuarioVm.CodigoUsuario;
                     usuarioDto.Email = usuarioVm.Email;
                     usuarioDto.Senha = usuarioVm.Senha;
                     usuarioDto.Perfil = usuarioVm.Perfil.ToString();
 
-                    //Fazer a alteração no banco de dados
+                    //Instancia o acesso ao banco de dados
                     _usuarioDao = new UsuarioDao();
+                    //Realiza a alteracao no banco de dados
                     var resultado = _usuarioDao.AlteraUsuario(usuarioDto);
 
-                    // Atualizar o cliente
-                    if (resultado > 0)
+                    //2 passo: Atualizar o cliente ou tecnico conforme o perfil
+                    //Verifica se cadastrou o usuario
+                    if (resultado)
                     {
                         if (usuarioVm.Perfil == Perfis.Cliente)
                         {
-                            //cria o cadastro do cliente
-                            Cliente clienteDto = new Cliente();
-                            clienteDto.Nome = usuarioVm.Nome;
-                            //instancia ao acesso ao banco de dados
+                            //Instancia ao acesso ao banco de dados
                             _clienteDao = new ClienteDao();
-                            //inclui o cliente no banco de daods
+                            //Obtem o cliente do usuario                             
+                            Cliente clienteDto = new Cliente();
+                            clienteDto = _clienteDao.ObtemClientePorUsuario(usuarioDto.CodigoUsuario);
+                            //Altera os dados do cliente
+                            clienteDto.Nome = usuarioVm.Nome;
+                            //Altera o cliente no banco de dados
                             _clienteDao.AlteraCliente(clienteDto);
                         }
+                        //else {} //para o administrador e tecnico
                     }
 
                     return RedirectToAction(nameof(Index));
                 }
 
-
-                //caso tenha erro volta para view de inclusão
+                //Caso tenha erro volta para view de inclusão
                 return View(usuarioVm);
 
             }
@@ -177,19 +200,46 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
             }
         }
 
-        // GET: UsuariosController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+        // GET: Exclui
+        [Authorize(Roles = "Administrador,Tecnico")]
+        public ActionResult Exclui(int id)
+        {            
+            //1 passo: obtem o usuario
+            //Instancia o acesso ao banco de dados
+            _usuarioDao = new UsuarioDao();
+            //Obtem o usuario no banco de dados
+            var usuarioDto = _usuarioDao.ObtemUsuario(id);
+            //Inicia o UsuarioViewModel
+            UsuarioViewModel usuarioVm = new UsuarioViewModel();
+            usuarioVm.CodigoUsuario = usuarioDto.CodigoUsuario;
+
+            return View(usuarioVm);
         }
 
-        // POST: UsuariosController/Delete/5
+        // POST: Exclui
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [Authorize(Roles = "Administrador,Tecnico")]
+        public ActionResult Exclui(UsuarioViewModel usuarioVm)
         {
             try
             {
+                //1 passo: obtem o usuario
+                //Instancia o acesso ao banco de dados
+                _usuarioDao = new UsuarioDao();
+                //Obtem o usuario no banco de dados
+                var usuarioDto = _usuarioDao.ObtemUsuario(usuarioVm.CodigoUsuario);
+                //Verifica se existe usuario é cliente
+                if (usuarioDto.Perfil == Perfis.Cliente.ToString())
+                {
+                    //Instancia o acesso ao banco de dados
+                    _clienteDao = new ClienteDao();
+                    //Exclui o cliente pelo codigo do usuario
+                    _clienteDao.ExcluiClientePorCodigoUsuario(usuarioDto.CodigoUsuario);             
+                }
+                //Exclui o usuario
+                _usuarioDao.ExcluiUsuario(usuarioDto.CodigoUsuario);
+                //Volta para index
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -197,5 +247,47 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
                 return View();
             }
         }
+
+        // GET: Exibe
+        [Authorize(Roles = "Administrador,Tecnico,Cliente")]
+        public ActionResult Exibe(int id)
+        {
+            //1 passo: obtem o usuario
+            //Instancia o acesso ao banco de dados
+            _usuarioDao = new UsuarioDao();
+            //Obtem o usuario no banco de dados
+            var usuarioDto = _usuarioDao.ObtemUsuario(id);
+            //Cria o usuario ViewModel
+            UsuarioViewModel usuarioVm = new UsuarioViewModel();
+            //Preenche ViewModel com o Dto
+            usuarioVm.CodigoUsuario = usuarioDto.CodigoUsuario;
+            usuarioVm.Email = usuarioDto.Email;
+            //usuarioVm.Senha = usuarioDto.Senha; //Seta senha em branco
+            //Verifica o perfil do usuario
+            switch (usuarioDto.Perfil)
+            {
+                case "Cliente":
+                    usuarioVm.Perfil = Perfis.Cliente;
+                    //2 passo: obtem o cliente pelo codigo do usuario
+                    //Instancia ao acesso ao banco de dados
+                    _clienteDao = new ClienteDao();
+                    var clienteDto = new Cliente();
+                    clienteDto = _clienteDao.ObtemClientePorUsuario(usuarioDto.CodigoUsuario);
+                    //Preenche o usuario ViewModel com os dados do cliente                    
+                    usuarioVm.Nome = clienteDto.Nome;
+                    break;
+                case "Tecnico":
+                    usuarioVm.Perfil = Perfis.Tecnico;
+                    break;
+                case "Administrador":
+                    usuarioVm.Perfil = Perfis.Administrador;
+                    break;
+                default:
+                    break;
+            }
+
+            return View(usuarioVm);
+        }
+
     }
 }

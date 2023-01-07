@@ -57,7 +57,7 @@ namespace ChamadoTecnicoAppData.Dao
 
         }
 
-        public void AlteraCliente(Cliente cliente)
+        public bool AlteraCliente(Cliente cliente)
         {
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
@@ -88,6 +88,7 @@ namespace ChamadoTecnicoAppData.Dao
                 conexao.Open();
                 //Executar o comando no B.D
                 comando.ExecuteNonQuery();
+                return true;
             }
             catch (Exception erro)
             {
@@ -141,8 +142,49 @@ namespace ChamadoTecnicoAppData.Dao
             }
         }
 
+        public void ExcluiClientePorCodigoUsuario(int codigoUsuario)
+        {
+            //Instanciar a conexão
+            SqlConnection conexao = new SqlConnection();
+            //Configurar a conexão
+            conexao.ConnectionString = conexaoSqlServer;
+
+            //Instanciar o camando
+            SqlCommand comando = new SqlCommand();
+            //Criar a instrução sql
+            string sql = "Delete From Clientes " +
+                "Where CodigoUsuario = @CodigoUsuario;";
+            //Setar a instrução sql no comando
+            comando.CommandText = sql;
+            //Setar o tipo de comando
+            comando.CommandType = System.Data.CommandType.Text;
+            //Preencher o os parametros do B.D com as informações do cliente
+            comando.Parameters.AddWithValue("@CodigoUsuario", codigoUsuario);
+
+            //Setar a execucação do comando na conexao com o B.D
+            comando.Connection = conexao;
+            //Tratamento de erro para execução do comando
+            try
+            {
+                //Conectar no B.D
+                conexao.Open();
+                //Executar o comando no B.D
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+            finally
+            {
+                //Desconectar do B.D
+                conexao.Close();
+            }
+        }
+
         public Cliente ObtemCliente(int codigoCliente)
         {
+                        
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
             //Configurar a conexão
@@ -193,8 +235,9 @@ namespace ChamadoTecnicoAppData.Dao
             }
         }
 
-        public Cliente ObtemClientePor(int codigoUsuario)
+        public Cliente ObtemClientePorUsuario(int codigoUsuario)
         {
+
             //Instanciar a conexão
             SqlConnection conexao = new SqlConnection();
             //Configurar a conexão
@@ -244,7 +287,7 @@ namespace ChamadoTecnicoAppData.Dao
                 //Desconectar do B.D
                 conexao.Close();
             }
-        } //Obtém o cliente usando o código de usuário
+        }
 
         public DataSet BuscaCliente(string pesquisa)
         {
@@ -290,6 +333,7 @@ namespace ChamadoTecnicoAppData.Dao
                 conexao.Close();
             }
         }
+
 
     }
 }
