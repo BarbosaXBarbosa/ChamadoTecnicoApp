@@ -11,7 +11,8 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
     public class UsuariosController : Controller
     {
         private UsuarioDao _usuarioDao;
-        private ClienteDao _clienteDao;        
+        private ClienteDao _clienteDao;
+        private TecnicoDao _tecnicoDao;
         
         [HttpGet]
         [Authorize(Roles = "Administrador,Tecnico")]
@@ -86,8 +87,22 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
                             _clienteDao = new ClienteDao();
                             //Inclui o cliente no banco de dados
                             _clienteDao.IncluiCliente(clienteDto);
-                        } 
+                        }
                         //else {} //para o administrador e tecnico
+                        else
+                        {
+                            //Cria o cadastro de cliente
+                            Tecnico tecnicoDto = new Tecnico();
+                            tecnicoDto.CodigoUsuario = codigoUsuario;
+                            tecnicoDto.Nome = usuarioVm.Nome;
+                            //Preenche com valor nulo string vazia
+                            tecnicoDto.Especialidade = "";
+                            //Instancia ao acesso ao banco de dados
+                            _tecnicoDao = new TecnicoDao();
+                            //Inclui o cliente no banco de dados
+                            _tecnicoDao.IncluiTecnico(tecnicoDto);
+                        }
+                       
                     }
 
                     //Retorna
