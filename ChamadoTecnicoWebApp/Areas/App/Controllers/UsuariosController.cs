@@ -89,20 +89,15 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
                             _clienteDao.IncluiCliente(clienteDto);
                         }
                         //else {} //para o administrador e tecnico
-                        else
+                        else //para o tecnico
                         {
-                            //Cria o cadastro de cliente
-                            Tecnico tecnicoDto = new Tecnico();
+                            Tecnico tecnicoDto = new Tecnico(usuarioVm.Nome);
                             tecnicoDto.CodigoUsuario = codigoUsuario;
-                            tecnicoDto.Nome = usuarioVm.Nome;
-                            //Preenche com valor nulo string vazia
                             tecnicoDto.Especialidade = "";
-                            //Instancia ao acesso ao banco de dados
                             _tecnicoDao = new TecnicoDao();
-                            //Inclui o cliente no banco de dados
                             _tecnicoDao.IncluiTecnico(tecnicoDto);
                         }
-                       
+
                     }
 
                     //Retorna
@@ -149,6 +144,10 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
                     break;
                 case "Tecnico":
                     usuarioVm.Perfil = Perfis.Tecnico;
+                    _tecnicoDao = new TecnicoDao();
+                    Tecnico tecnicoDto = new Tecnico();
+                    tecnicoDto = _tecnicoDao.ObtemTecnicoPorUsuario(usuarioDto.CodigoUsuario);
+                    usuarioVm.Nome = tecnicoDto.Nome;
                     break;
                 case "Administrador":
                     usuarioVm.Perfil = Perfis.Administrador;
@@ -200,6 +199,17 @@ namespace ChamadoTecnicoWebApp.Areas.App.Controllers
                             _clienteDao.AlteraCliente(clienteDto);
                         }
                         //else {} //para o administrador e tecnico
+                        else //para o  tecnico
+                        {
+                            _tecnicoDao = new TecnicoDao();
+                            Tecnico tecnicoDto = new Tecnico();
+                            tecnicoDto = _tecnicoDao.ObtemTecnicoPorUsuario(usuarioDto.CodigoUsuario);
+                            //Altera os dados do cliente
+                            tecnicoDto.Nome = usuarioVm.Nome;
+                            //Altera o cliente no banco de dados
+                            _tecnicoDao.AlteraTecnico(tecnicoDto);
+
+                        }
                     }
 
                     return RedirectToAction(nameof(Index));
